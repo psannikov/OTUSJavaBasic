@@ -1,4 +1,4 @@
-package HW.HW2.ide;
+package hw.hw2.ide;
 import java.util.Base64;
 import java.util.Scanner;
 public class HomeWork {
