@@ -18,8 +18,8 @@ public class WordUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println("Ввод пустой строки - " + WordUtils.reverseWords(""));
-        System.out.println("Ввод одного слова - " + WordUtils.reverseWords("word"));
-        System.out.println("Ввод двух слов - " + WordUtils.reverseWords("два слова"));
+        System.out.println("Р’РІРѕРґ РїСѓСЃС‚Рѕ СЃС‚СЂРѕРєРё - " + WordUtils.reverseWords(""));
+        System.out.println("Р’РІРѕРґ РѕРґРЅРѕРіРѕ СЃР»РѕРІР° - " + WordUtils.reverseWords("word"));
+        System.out.println("Р’РІРѕРґ РґРІСѓС… СЃР»РѕРІ - " + WordUtils.reverseWords("РґРІР° СЃР»РѕРІР°"));
     }
 }
