@@ -1,16 +1,11 @@
 package homework.homework3;
 
 public class FibonacciUtils {
-    public static String getFibonacciSum(byte limit) {
-        int i1 = 1;
-        int i2 = 1;
-        int f = 0;
-        for (byte i=3; i<=limit; i++){
-            f = i1 + i2;
-            i1 = i2;
-            i2 = f;
+    public static int getFibonacciSum(byte limit) {
+        if (limit <= 1) {
+            return limit;
         }
-        return String.valueOf((f - 1) + (f - 2));
+        return getFibonacciSum((byte) (limit - 1)) + getFibonacciSum((byte) (limit - 2));
     }
 
     private FibonacciUtils(){
