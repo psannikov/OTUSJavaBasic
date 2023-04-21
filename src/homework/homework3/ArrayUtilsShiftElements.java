@@ -21,7 +21,7 @@ public class ArrayUtilsShiftElements {
     public static void main(String[] args) {
         System.out.println(
                 "При вводе массива [1, 2, 3, 4, 5], метод должен вернуть массив [2, 3, 4, 5, 1] - '"
-                        + Arrays.toString(ArrayUtilsShiftElements.shiftElements(new int[]{8, 2, 3, 4, 5}))
+                        + Arrays.toString(ArrayUtilsShiftElements.shiftElements(new int[]{1, 2, 3, 4, 5}))
                         + "'"
         );
     }
