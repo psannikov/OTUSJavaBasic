@@ -20,7 +20,7 @@ public class ArrayUtilsTwoDigitNumbers {
     public static void main(String[] args) {
         System.out.println(
                 "При вводе массива длиной 5, метод должен вернуть массив случайных двузначных чисел - '"
-                        + Arrays.toString(ArrayUtilsTwoDigitNumbers.fillArrayByTwoDigitNumbers(new int[5]))
+                        + Arrays.toString(ArrayUtilsTwoDigitNumbers.fillArrayByTwoDigitNumbers(new int[6]))
                         +"'"
         );
     }
