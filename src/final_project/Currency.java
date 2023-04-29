@@ -1,14 +1,14 @@
-package others;
+package final_project;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static others.WorkWithFile.*;
+import static final_project.WorkWithFile.*;
 
 public class Currency {
     String[] currencyData = new String[6];
 
     public Currency() {
-        final String FILE_NAME = "data.txt";
+        final String FILE_NAME = "/final_project/data.txt";
         Scanner scanner = new Scanner(System.in);
         String dataToWrite;
         boolean cycleBoolean = true;
