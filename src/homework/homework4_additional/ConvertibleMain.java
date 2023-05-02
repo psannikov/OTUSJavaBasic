@@ -6,7 +6,7 @@ package homework.homework4_additional;
 
 public class ConvertibleMain {
     public static void main(String[] args) {
-        System.out.println("100 километров в милях = " + new Mile().parseValue(100));
+        System.out.println("100 километров в милях = " + new Mile().parseValue(100000000));
         System.out.println("0,99 километров в верстах = " + new Verst().parseValue(0.99));
     }
 }
@@ -21,15 +21,13 @@ interface Convertible {
 class Mile implements Convertible {
     @Override
     public long parseValue(double kilosValue) {
-        //TODO
-        return 0;
+        return (long)(Math.floor(kilosValue/KILOS_IN_MILE));
     }
 }
 
 class Verst implements Convertible {
     @Override
     public long parseValue(double kilosValue) {
-        //TODO
-        return 0;
+        return (long)(Math.floor(kilosValue/KILOS_IN_VERST));
     }
 }
