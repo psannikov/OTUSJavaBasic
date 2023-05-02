@@ -1,62 +1,55 @@
 package final_project;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import static final_project.ServiceFunction.*;
+import static final_project.ServiceFunction.printText;
 import static final_project.WorkWithFile.*;
 
 public class Currency {
     String[] currencyData = new String[6];
 
-    public Currency() {
+    public Currency() throws IOException {
         final String FILE_NAME = "/final_project/data.txt";
-        Scanner scanner = new Scanner(System.in);
         String dataToWrite;
         boolean cycleBoolean = true;
-        System.out.print("Укажите валюту в которой будет выполнятся работа: ");
-        currencyData[0] = scanner.next();
+        currencyData[0] = getStringWithPrintedText("Укажите валюту в которой будет выполнятся работа: ");
         if (checkData(currencyData[0],FILE_NAME)) {
-            System.out.println("В справочнике системы не найдено информации о данной валюте");
-            System.out.println("Необходимо заполнить информацию о валюте");
-            System.out.print("Для заполнения справочника введите ДА ");
-            if (scanner.next().equalsIgnoreCase("ДА")) {
-                System.out.println("Заполнение информации по валюте: " + currencyData[0]);
+            printText("В справочнике системы не найдено информации о данной валюте",
+                    "Необходимо заполнить информацию о валюте");
+            if (getStringWithPrintedText("Для заполнения справочника введите ДА ").equalsIgnoreCase("ДА")) {
+                printText("Заполнение информации по валюте: " + currencyData[0]);
                 while (cycleBoolean) {
-                    System.out.println("Укажите изменяемое ли это слово, возможные варианты ответа: да, нет");
-                    //TODO сначала надо проверить а потом записывать
-                    currencyData[1] = scanner.next().toLowerCase();
+                    currencyData[1] = getStringWithPrintedText("Укажите изменяемое ли это слово, возможные варианты ответа: да, нет").toLowerCase();
                     if ((currencyData[1].equals("да")) || (currencyData[1].equals("нет"))) {
                         cycleBoolean = false;
                     } else {
-                        System.out.println("Вы указали некорректное значение пожалуйста повторите ввод");
+                        printText("Вы указали некорректное значение пожалуйста повторите ввод");
                     }
                 }
                 cycleBoolean = true;
                 while (cycleBoolean) {
-                    System.out.println("Укажите какого рода данное слово, возможные варианты ответа: мужской, женский, средний");
-                    //TODO сначала надо проверить а потом записывать
-                    currencyData[2] = scanner.next().toLowerCase();
+                    currencyData[2] = getStringWithPrintedText("Укажите какого рода данное слово, возможные варианты ответа: мужской, женский, средний").toLowerCase();
                     if ((currencyData[2].equals("мужской")) ||
                             (currencyData[2].equals("женский")) ||
                             (currencyData[2].equals("средний"))) {
                         cycleBoolean = false;
                     } else {
-                        System.out.println("Вы указали некорректное значение пожалуйста повторите ввод");
+                        printText("Вы указали некорректное значение пожалуйста повторите ввод");
                     }
                 }
                 if (currencyData[1].equals("да")) {
-                    System.out.println("Укажите как пишется валюта в именительном падеже: ");
-                    currencyData[3] = scanner.next();
-                    System.out.println("Укажите как пишется валюта в родительном падеже единственном числе: ");
-                    currencyData[4] = scanner.next();
-                    System.out.println("Укажите как пишется валюта в родительном падеже множественном числе: ");
-                    currencyData[5] = scanner.next();
+                    currencyData[3] = getStringWithPrintedText("Укажите как пишется валюта в именительном падеже: ");
+                    currencyData[4] = getStringWithPrintedText("Укажите как пишется валюта в родительном падеже единственном числе: ");
+                    currencyData[5] = getStringWithPrintedText("Укажите как пишется валюта в родительном падеже множественном числе: ");
                 }
-                System.out.println("Будет добавлена информация о валюте:\nНазвание: " + currencyData[0] +
-                        "\nИзменяемая форма слова: " + currencyData[1] +
-                        "\nРод слова: " + currencyData[2] +
-                        "\nФорма именительного падежа: " + currencyData[3] +
-                        "\nФорма родительного падежа единственного числа: " + currencyData[4] +
-                        "\nФорма родительного падежа множественного числа: " + currencyData[5]);
+                printText("Будет добавлена информация о валюте:\nНазвание: " + currencyData[0],
+                        "Изменяемая форма слова: " + currencyData[1],
+                        "Род слова: " + currencyData[2],
+                        "Форма именительного падежа: " + currencyData[3],
+                        "Форма родительного падежа единственного числа: " + currencyData[4],
+                        "Форма родительного падежа множественного числа: " + currencyData[5]);
                 dataToWrite = currencyData[0] + ";" + currencyData[1] + ";" + currencyData[2] + ";" +
                         currencyData[3] + ";" + currencyData[4] + ";" + currencyData[5];
                 writeFile(dataToWrite, FILE_NAME);

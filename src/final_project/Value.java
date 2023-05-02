@@ -1,19 +1,21 @@
 package final_project;
 
+import java.io.IOException;
 import java.util.Scanner;
+
+import static final_project.ServiceFunction.getIntWithPrintedText;
 
 public class Value {
     int value;
     Currency currency;
-    public Value(Currency currency) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите число, которое требуется преобразовать в текстовый формат: ");
-        value = scanner.nextInt();
+    public Value(Currency currency) throws IOException {
+        value = getIntWithPrintedText("Введите число, которое требуется преобразовать в текстовый формат: ");
         this.currency = currency;
         //TODO добавить обработчик исключений
         //TODO подумать как вводить числа больше int
     }
     public String convertValueToString () {
+        //TODO подумать по поводу более красивой реализации
         int[] arrayValue = new int[4];
         arrayValue[3] = value/1000_000_000;
         arrayValue[2] = (value%1000_000_000)/1000_000;

@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static final_project.ServiceFunction.printText;
+
 public class WorkWithFile {
     public static ArrayList<String> readFile (String fileName) {
         ArrayList<String> res = new ArrayList<String>();
@@ -21,7 +23,7 @@ public class WorkWithFile {
             bufferedReader.close();
 
         } catch (IOException e) {
-            System.out.println("Exception occurred: " + e.getMessage());
+            printText("Exception occurred: " + e.getMessage());
         }
         return res;
     }
@@ -33,7 +35,7 @@ public class WorkWithFile {
             bufferedWriter.write(newData+"\n");
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("Exception occurred: " + e.getMessage());
+            printText("Exception occurred: " + e.getMessage());
         }
     }
     public static boolean checkData (String dataSearch, String fileName) {
