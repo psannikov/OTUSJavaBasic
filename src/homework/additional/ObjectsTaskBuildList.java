@@ -1,4 +1,4 @@
-package homework.homework4_additional;
+package homework.additional;
 
 /*Реализуйте метод, который принимает объекты любого типа и возвращает список из таких объектов*/
 

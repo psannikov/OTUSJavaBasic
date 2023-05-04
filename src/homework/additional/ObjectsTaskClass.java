@@ -1,4 +1,4 @@
-package homework.homework4_additional;
+package homework.additional;
 
 /*Реализуйте метод, который принимает объект и класс и проверяет,
 что переданный объект принадлежит к переданному классу.*/

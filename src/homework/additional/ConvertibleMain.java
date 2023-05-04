@@ -1,4 +1,4 @@
-package homework.homework4_additional;
+package homework.additional;
 
 /*Реализуйте классы для конвертации расстояния из километров в мили и из километров в версты.
 Для расчётов использовать константы, объявленные в интерфейсе Convertible.
