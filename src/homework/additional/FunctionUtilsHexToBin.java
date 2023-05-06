@@ -2,8 +2,7 @@ package homework.additional;
 /*Реализуйте метод, который из переданного шестнадцатеричного числа возвращает двоичное.*/
 public class FunctionUtilsHexToBin {
     public static String hexToBin(String hexBase) {
-        //TODO
-        return "010";
+        return Integer.toBinaryString(Integer.parseInt(hexBase,16));
     }
     private FunctionUtilsHexToBin() {
 
