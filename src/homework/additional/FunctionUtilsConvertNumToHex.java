@@ -2,8 +2,7 @@ package homework.additional;
 /*Реализуйте метод, который возвращает шестнадцатеричное представление переданного числа.*/
 public class FunctionUtilsConvertNumToHex {
     public static String convertNumToHex(int input) {
-// TODO
-        return "0";
+        return Integer.toHexString(input);
     }
 
     private FunctionUtilsConvertNumToHex() {

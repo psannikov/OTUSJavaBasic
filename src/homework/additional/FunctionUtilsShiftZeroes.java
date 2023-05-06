@@ -3,8 +3,7 @@ package homework.additional;
 и возвращает получившееся десятиричное число.*/
 public class FunctionUtilsShiftZeroes {
     public static int shiftZeroes(int input) {
-// TODO
-        return 0;
+        return Integer.parseInt(Integer.toBinaryString(input).replace("0","1"),2);
     }
     private FunctionUtilsShiftZeroes() {
 
