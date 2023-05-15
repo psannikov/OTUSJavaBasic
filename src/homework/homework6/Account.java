@@ -3,8 +3,10 @@ package homework.homework6;
 public class Account {
     private int accountId;
     private int countOfMoney;
+    private Client client;
 
-    public Account(int accountId, int countOfMoney) {
+    public Account(Client client, int accountId, int countOfMoney) {
+        this.client = client;
         this.accountId = accountId;
         this.countOfMoney = countOfMoney;
     }
