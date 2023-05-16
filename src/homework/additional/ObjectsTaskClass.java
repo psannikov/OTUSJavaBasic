@@ -8,8 +8,7 @@ public class ObjectsTaskClass {
     }
 
     public static <T> boolean isClass(Object object, Class<T> clazz) {
-//TODO
-        return false;
+        return clazz.isInstance(object);
     }
 
     public static void main(String[] args) {
