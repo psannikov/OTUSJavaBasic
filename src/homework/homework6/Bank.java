@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static homework.homework6.ServiceFunction.printText;
+
 public class Bank {
     private Map<Client, List<Account>> bankData = new HashMap<>();
     public List<Account> getListAccountsByClient (Client client) {
@@ -15,43 +17,53 @@ public class Bank {
         for (Map.Entry<Client, List<Account>> items : bankData.entrySet()) {
             for (Account accountInList: items.getValue()) {
                 if (accountInList.equals(account)) {
-                    System.out.println("Информация о клиенте найдена");
                     clientByAccount = items.getKey();
-                } else {
-                    System.out.println("Информация о клиенте не найдена");
                 }
             }
+        }
+        if ((clientByAccount == null)) {
+            printText("Информация о клиенте не найдена");
+        } else {
+            printText("Информация о клиенте найдена");
         }
         return clientByAccount;
     }
     public void addNewClient (Client client) {
         if (bankData == null) {
-            System.out.println("Клиент успешно добавлен");
-            bankData.put(client, new ArrayList<Account>());
+            printText("Клиент успешно добавлен");
+            bankData.put(client, new ArrayList<>());
         } else {
             if (bankData.containsKey(client)) {
-                System.out.println("Указанный клиент уже добавлен в базу банка");
+                printText("Указанный клиент уже добавлен в базу банка");
             } else {
-                System.out.println("Клиент успешно добавлен");
-                bankData.put(client, new ArrayList<Account>());
+                printText("Клиент успешно добавлен");
+                bankData.put(client, new ArrayList<>());
             }
         }
     }
     public void addNewAccountToClient (Client client, Account account) {
         if (!bankData.containsKey(client)) {
-            System.out.println("Указанного клиента нет в базе банка, предварительно добавьте информацию о клиенте");
+            printText("Указанного клиента нет в базе банка, предварительно добавьте информацию о клиенте");
         } else {
             for (List<Account> list : bankData.values()) {
                 for (Account accountInList : list) {
                     if (accountInList.equals(account)) {
-                        System.out.println("Указанный аккаунт уже добавлен в базу банка");
+                        printText("Указанный аккаунт уже добавлен в базу банка");
                         return;
                     }
                 }
             }
-            List<Account> listOfAccountsThisClient = bankData.getOrDefault(client, new ArrayList<Account>());
+            List<Account> listOfAccountsThisClient = bankData.getOrDefault(client, new ArrayList<>());
             listOfAccountsThisClient.add(account);
             bankData.put(client,listOfAccountsThisClient);
+            printText("Аккаунт добавлен в базу банка");
+        }
+    }
+    public void changeCountOfMoneyInAccount (Account account, int countOfMoney, String assign) {
+        if (getClientByAccount(account).getAge() >= 18) {
+            account.changeCountOfMoney(countOfMoney,assign);
+        } else {
+            printText("Ваш возраст не позволяет проводить операции с аккаунтом");
         }
     }
 }
