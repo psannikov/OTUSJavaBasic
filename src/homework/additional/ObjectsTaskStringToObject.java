@@ -12,8 +12,9 @@ public class ObjectsTaskStringToObject {
     private ObjectsTaskStringToObject(){}
 
     public static <T> T makeObjectFromString(String input, T anyObject) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Constructor constructor = anyObject.getClass().getConstructor();
-        return (T) constructor.newInstance(input);
+        Class<?>[] parameterTypes = {input.getClass()};
+        Constructor constructor = anyObject.getClass().getConstructor(parameterTypes);
+        return (constructor == null) ? null : (T) constructor.newInstance(input);
     }
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
