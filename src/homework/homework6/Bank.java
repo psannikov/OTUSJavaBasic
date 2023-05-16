@@ -1,11 +1,12 @@
 package homework.homework6;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Bank {
-    private Map<Client, List<Account>> bankData;
+    private Map<Client, List<Account>> bankData = new HashMap<>();
     public List<Account> getListAccountsByClient (Client client) {
         return bankData.get(client);
     }
