@@ -5,6 +5,7 @@ import static homework.homework6.ServiceFunction.printText;
 public class Run {
     public static void main(String[] args) {
         Bank bank = new Bank();
+        //Создаем данные для работы
         Client client1 = new Client(1, "Иван", (byte) 20);
         Client client2 = new Client(2, "Петя", (byte) 10);
         Client client3 = new Client(3, "Ваня", (byte) 50);
@@ -15,6 +16,7 @@ public class Run {
         Account account5 = new Account(client2, 1, 1);
         Account account6 = new Account(client3, 5, 11);
         Account account7 = new Account(new Client(4, "Коля", (byte) 20), 1, 1);
+        //Тесты по добавлению данных по клиентам и аккаунтам
         printText("=".repeat(30));
         printText("Блок создания данных о клиентах и аккаунтах");
         printText("=".repeat(30));
@@ -44,6 +46,7 @@ public class Run {
         bank.addNewAccountToClient(client3,account6);
         printText("Пытаемся добавить информацию по аккаунту 7 и клиенту создавая его в момент инициализации");
         bank.addNewAccountToClient(new Client(5, "Саша", (byte) 40),account7);
+        //Тесты получения данных
         printText("=".repeat(30));
         printText("Блок получения данных");
         printText("=".repeat(30));
@@ -52,6 +55,7 @@ public class Run {
         printText("=".repeat(30));
         printText("Получение клиента по аккаунту");
         printText(bank.getClientByAccount(account1).toString());
+        //Тесты изменения данных
         printText("=".repeat(30));
         printText("Блок операций по счету");
         printText("=".repeat(30));
