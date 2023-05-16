@@ -5,8 +5,15 @@ import java.util.*;
 
 public class CollectionUtilsCount {
     public static <K> Map<K, Integer> countElements(K[] inputArray) {
-//TODO
-        return Map.of();
+        Map <K, Integer> result = new HashMap<>();
+        for (K element : inputArray) {
+            if (result.containsKey(element)) {
+                result.put(element,result.get(element).intValue() + 1);
+            } else {
+                result.put(element,1);
+            }
+        }
+        return result;
     }
 
     private CollectionUtilsCount() {

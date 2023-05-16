@@ -1,5 +1,6 @@
 package homework.additional;
 /*Реализуйте класс итератора одномерного массива.*/
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -28,14 +29,14 @@ class OneDimensionalArrayIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        //TODO
-        return false;
+        return  this.index < this.array.length;
     }
 
     @Override
     public T next() throws NoSuchElementException {
-        //TODO
-        return null;
+        T result = this.array[index];
+        this.index++;
+        return result;
     }
 
 }

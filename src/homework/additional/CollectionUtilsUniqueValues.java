@@ -4,8 +4,13 @@ import java.util.*;
 
 public class CollectionUtilsUniqueValues {
     public static <T> Collection<T> removeDuplicates(Collection<T> inputCollection) {
-//TODO
-        return List.of();
+        Collection<T> result = new ArrayList<>();
+        for (T items : inputCollection) {
+            if (!result.contains(items)) {
+                result.add(items);
+            }
+        }
+        return result;
     }
 
     private CollectionUtilsUniqueValues() {

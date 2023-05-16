@@ -4,8 +4,11 @@ import java.util.*;
 
 public class CollectionUtilsInvertMap {
     public static <K, V> Map<V, K> invertMap(Map<? extends K, ? extends V> inputMap) {
-//TODO
-        return Map.of();
+        Map<V, K> result = new HashMap<>();
+        for (Map.Entry<? extends K, ? extends V> items : inputMap.entrySet()) {
+            result.put(items.getValue(),items.getKey());
+        }
+        return result;
     }
 
     private CollectionUtilsInvertMap() {
