@@ -1,6 +1,6 @@
-package homework4;
+package homework.homework4;
 
-import static homework4.ServiceFunction.printText;
+import static homework.homework4.ServiceFunction.printText;
 
 public class Answer {
     private int answerId;
