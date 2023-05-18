@@ -1,8 +1,8 @@
-package homework.homework4;
+package homework4;
 
 import java.io.IOException;
 
-import static homework.homework4.ServiceFunction.*;
+import static homework4.ServiceFunction.*;
 
 public class Question {
     private String question;
