@@ -51,10 +51,10 @@ public class Run {
         printText("Блок получения данных");
         printText("=".repeat(30));
         printText("Получение списка аккаунтов по переданому клиенту");
-        printText(bank.getListAccountsByClient(client1).toString());
+        printText(bank.getListAccountsByClient(new Client(1, "Иван", (byte) 20)).toString());
         printText("=".repeat(30));
         printText("Получение клиента по аккаунту");
-        printText(bank.getClientByAccount(account1).toString());
+        printText(bank.getClientByAccount(new Account(new Client(1, "Иван", (byte) 20), 1, 30)).toString());
         //Тесты изменения данных
         printText("=".repeat(30));
         printText("Блок операций по счету");
