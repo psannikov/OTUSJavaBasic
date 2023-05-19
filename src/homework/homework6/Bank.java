@@ -15,15 +15,12 @@ public class Bank {
     public Client getClientByAccount (Account account) {
         Client clientByAccount = null;
         for (Map.Entry<Client, List<Account>> items : bankData.entrySet()) {
-            for (Account accountInList: items.getValue()) {
-                if (accountInList.equals(account)) {
-                    clientByAccount = items.getKey();
-                }
+            if (items.getValue().contains(account))
+            {
+                clientByAccount = items.getKey();
             }
         }
-        if ((clientByAccount == null)) {
-            printText("Информация о клиенте не найдена");
-        } else {
+        if (clientByAccount != null) {
             printText("Информация о клиенте найдена");
         }
         return clientByAccount;
