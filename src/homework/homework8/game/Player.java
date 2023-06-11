@@ -1,4 +1,4 @@
-package ru.otus.game;
+package homework.homework8.game;
 
 public class Player {
     private final String name;
