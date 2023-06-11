@@ -18,8 +18,8 @@ public class Assertions {
             throw new AssertionError(String.format("Expected \"%s\" = \"%s\"", expected, actual));
         }
     }
-    public static void assertNotEquals(String expected, String actual) {
-        if (expected.equals(actual)) {
+    public static void assertSame(Object expected, Object actual) {
+        if (expected == actual) {
             throw new AssertionError(String.format("Expected \"%s\" = \"%s\"", expected, actual));
         }
     }
