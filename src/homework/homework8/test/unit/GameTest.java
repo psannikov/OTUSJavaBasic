@@ -4,14 +4,20 @@ import homework.homework8.assertions.Assertions;
 import homework.homework8.game.*;
 import homework.homework8.test.unit.fake.DiceImplStub;
 import homework.homework8.test.unit.fake.DiceImplStub2;
+import homework.homework8.test.unit.fake.GameWinnerConsolePrinterSpy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameTest {
+    List<String> actualFlow = new ArrayList<>();
+
     private final Dice diceStub = new DiceImplStub();
     private final Dice diceStub2 = new DiceImplStub2();
     private final GameWinnerPrinter winnerPrinter = new GameWinnerConsolePrinter();
+    private final GameWinnerPrinter winnerPrinterSpy = new GameWinnerConsolePrinterSpy(actualFlow);
     private final Game gameStub = new Game(diceStub, winnerPrinter);
-    private final Game gameStub2 = new Game(diceStub2, winnerPrinter);
-
+    private final Game gameStub2 = new Game(diceStub2, winnerPrinterSpy);
     private final Player player1 = new Player("Вася");
     private Player player2 = new Player("Петя");
 
@@ -46,11 +52,14 @@ public class GameTest {
     }
 
     public void testGamePlayGame() {
+        String scenario = "Тестирование корректности определения победителя";
         try {
+            String actual;
             gameStub2.playGame(player1,player2);
-//            winnerPrinter.printWinner(player1);
+            actual = actualFlow.get(0);
+            Assertions.assertEquals(player2.getName(),actual);System.out.printf("\"%s\" passed %n", scenario);
         } catch (Throwable e) {
-
+            System.err.printf("\"%s\" fails with message \"%s\" %n", scenario, e.getMessage());
         }
     }
 

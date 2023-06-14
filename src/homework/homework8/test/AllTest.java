@@ -9,14 +9,15 @@ public class AllTest {
         метод Random.nextInt() дает любой инт в том числе
         за пределами 1-6
          */
-//        new DiceImplTest().testDiceOutOfRangeOver6();
-//        new DiceImplTest().testDiceOutOfRangeLower1();
-//        new GameTest().testGameEqualsPlayers();
+        new DiceImplTest().testDiceOutOfRangeOver6();
+        new DiceImplTest().testDiceOutOfRangeLower1();
+        new GameTest().testGameEqualsPlayers();
         /*Вторая ошибка игры - если будут выброшены одинаковые значения
         игра возвращает победителем второго человека, должна быть ничья
         по моей логике должна быть выбрашена ошибка
          */
-//        new GameTest().testGameEqualsDiceRoll();
         new GameTest().testGamePlayGame();
+        new GameTest().testGameEqualsDiceRoll();
+
     }
 }
