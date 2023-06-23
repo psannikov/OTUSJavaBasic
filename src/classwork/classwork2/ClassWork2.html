@@ -23,7 +23,19 @@
         }
     </style>
 
-  <!--Сюда вствляем скрипт для второго упражнения-->
+  <script>
+    function addFinalText() {
+      const textBlock = document.getElementById("textBlock")
+      const inputBlock = document.getElementById("inputBlock")
+      let p = document.getElementById("finalText")
+      if (!p) {
+        p = document.createElement("p")
+        p.id = "finalText"
+        textBlock.appendChild(p)
+      }
+      p.innerHTML = inputBlock.value
+    }
+  </script>
 </head>
 
 <body>
@@ -37,7 +49,7 @@
   Ситуация:
 </h3>
 
-<div class = "content-block">
+<div class = "content-block" id = "textBlock">
   <p>
     Закинул старик невод в море...
   </p>
@@ -48,12 +60,10 @@
   Форма для ввода:
 </h3>
 
-<div class = "input-form">
-  <input type = "text" value = "И сидит теперь на берегу без невода!">
+<div class = "input-form" >
+  <input id="inputBlock" type = "text" value = "И сидит теперь на берегу без невода!">
 </div>
-
-
-<!--Сюда вствляем скрипт для первого упражнения-->
+<button type="button" onclick=addFinalText()>Кнопка</button>
 
 <br/><br/><br/>
 <hr/>
