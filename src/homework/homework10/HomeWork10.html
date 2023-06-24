@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Домашняя работа</title>
     <style>
         h1, h2, h3 {
             color: black;
+        }
+
+        p, button {
+            margin: 10px
         }
 
         .students-tab {
@@ -19,91 +24,131 @@
             border: 1px solid steelblue;
         }
 
-        .students-tab-col1 {
-            width: 250px;
-        }
         .input-form {
             border: 1px solid steelblue;
-            width: 400px;
+            width: 600px;
+            display: flex;
+        }
+
+        .column {
+            flex-basis: 50%;
+            text-align: left;
+        }
+
+        #studentName, #studentBirthday, #studentSex {
+            width: 100%;
+        }
+
+        #emptyRow {
+            height: 25px;
         }
     </style>
     <script>
-        // "use strict"
-        let count_click = 0
-        let total_age = 0
+        "use strict"
+        let countClick = 0
+        let totalAge = 0
         function getAge(bday) {
             return Math.floor((new Date() - new Date(bday)) / 1000 / 60 / 60 / 24 / 365)
         }
         function addStudent() {
+            countClick = countClick + 1
             const studentsTab = document.getElementById("studentsTab")
             let studentName = document.getElementById("studentName").value
             const studentBirthday = document.getElementById("studentBirthday").value
             const studentSex = document.getElementById("studentSex").value
             const studentAge = getAge(studentBirthday)
+            totalAge = totalAge + studentAge
             const newRow = studentsTab.insertRow(studentsTab.rows.length)
             newRow.insertCell(0).appendChild(document.createTextNode(studentName))
             newRow.insertCell(1).appendChild(document.createTextNode(studentSex))
             newRow.insertCell(2).appendChild(document.createTextNode(studentBirthday))
             newRow.insertCell(3).appendChild(document.createTextNode(studentAge))
-            const studentsTabTotals = document.getElementById("studentsTabTotals")
-            if (count_click == 0) {
-                let newRowEmpty = studentsTabTotals.insertRow(studentsTabTotals.rows.length);
-                newRowEmpty.insertCell(0).appendChild(document.createTextNode(""));
-                let newRowTotals = studentsTabTotals.insertRow(studentsTabTotals.rows.length);
-                newRowTotals.insertCell(0).appendChild(document.createTextNode("Средний возраст"));
-                newRowTotals.insertCell(1).appendChild(document.createTextNode(""));
-                newRowTotals.insertCell(2).appendChild(document.createTextNode(""));
-                newRowTotals.insertCell(3).appendChild(document.createTextNode("в"));
+
+
+            let emptyRow = document.getElementById("emptyRow")
+            if (!emptyRow) {
+                emptyRow = studentsTabTotals.insertRow(studentsTabTotals.rows.length)
+                emptyRow.id = "emptyRow"
+                let newEmptyCell = document.createElement("td");
+                newEmptyCell.colSpan = 4;
+                emptyRow.appendChild(newEmptyCell)
+                // добавить непечат символ
             }
-            // else {studentsTabTotals.deleteRow(lastRowIndex)}
-            count_click = count_click + 1
-            // total_age = total_age + studentAge
-            // let newRowTotals = studentsTabTotals.insertRow(studentsTabTotals.rows.length);
-            //     newRowTotals.insertCell(0).appendChild(document.createTextNode("Средний возраст"));
-            //     newRowTotals.insertCell(1).appendChild(document.createTextNode(""));
-            //     newRowTotals.insertCell(2).appendChild(document.createTextNode(""));
-            // studentsTabTotals.
+            let totalsRow = document.getElementById("totalsRow")
+            if (!totalsRow) {
+                totalsRow = studentsTabTotals.insertRow(studentsTabTotals.rows.length)
+                totalsRow.id = "totalsRow"
+                let newTotalTextCell = document.createElement("td");
+                newTotalTextCell.colSpan = 3;
+                newTotalTextCell.innerHTML = "Средний возраст учащихся"
+                //     let newTotalDataCell = document.createElement("td");
+                //     newTotalDataCell.id = "totalDataCell"
+                //     alert(count_click)
+                //     newTotalDataCell.innerHTML = count_click
+                totalsRow.appendChild(newTotalTextCell)
+                //     totalsRow.appendChild(newTotalDataCell)
+                //     // задать значение ячейке
+            }
+            let newTotalDataCell = document.getElementById("totalDataCell")
+            if (!newTotalDataCell) {
+                newTotalDataCell = document.createElement("td");
+                newTotalDataCell.id = "totalDataCell"
+                totalsRow.appendChild(newTotalDataCell)
+            }
+            newTotalDataCell.innerHTML = totalAge / countClick
         }
 
     </script>
 </head>
+
 <body>
     <h3>Форма добавления информации о студенте</h3>
-    <div class = "input-form">
-        <p>
-            <label for = "studentName">Новый студент:</label>
-            <input id = "studentName" type = "text" value = "Ноунэйм">
-        </p>
-        <p>
-            <label for = "studentBirthday">Дата рождения</label>
-            <input id = "studentBirthday" name = "BirthDay" type = "date" value = "2023-01-01">
-        </p>
-        <p>
-            <label for = "studentSex">Пол</label>    
-                <select id = "studentSex">
-                    <option value = "мужчина">мужчина</option>
-                    <option value = "женщина">женщина</option>
+    <div class="input-form">
+        <div class="column">
+            <p>
+                <label for="studentName">Имя студента:</label>
+            </p>
+            <p>
+                <label for="studentBirthday">Дата рождения:</label>
+            </p>
+            <p>
+                <label for="studentSex">Пол:</label>
+            </p>
+            <button onclick="addStudent()">Добавить</button>
+        </div>
+        <div class="column">
+            <p>
+                <input id="studentName" type="text" value="Вася">
+            </p>
+            <p>
+                <input id="studentBirthday" name="BirthDay" type="date" value="2023-01-01">
+            </p>
+            <p>
+                <select id="studentSex">
+                    <option value="мужчина">мужчина</option>
+                    <option value="женщина">женщина</option>
                 </select>
-        </p>
-        <button onclick = "addStudent()">Добавить</button>
+            </p>
+        </div>
     </div>
-<h3>Таблица студентов</h3>
-<table class="students-tab">
-    <thead>
-    <tr>
-        <td class="students-tab-col1">Имя студента</td>
-        <td class="students-tab-col2">Пол</td>
-        <td class="students-tab-col3">Дата рождения</td>
-        <td class="students-tab-col4">Возраст</td>
-    </tr>
-    </thead>
-    <tbody id="studentsTab">
-    </tbody>
-    <tbody id="studentsTabTotals">
-        <tr></tr>
-    </tbody>
+    <h3>Таблица студентов</h3>
+    <table class="students-tab">
+        <thead>
+            <tr>
+                <td class="students-tab-col1">Имя студента</td>
+                <td class="students-tab-col2">Пол</td>
+                <td class="students-tab-col3">Дата рождения</td>
+                <td class="students-tab-col4">Возраст</td>
+            </tr>
+        </thead>
+        <tbody id="studentsTab">
+        </tbody>
+        <tbody id="studentsTabTotals">
+            <tr></tr>
+        </tbody>
     </table>
-</table>
+    </table>
 
 </body>
+
 </html>
