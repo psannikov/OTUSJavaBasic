@@ -1,27 +1,30 @@
 <!DOCTYPE>
 <html>
+
 <head>
   <title>Классная работа</title>
   <style>
-        h1, h2, h3 {
-            color: steelblue;
-        }
+    h1,
+    h2,
+    h3 {
+      color: steelblue;
+    }
 
-        .content-block {
-            width: 800px;
-            margin-left: 20px;
-        }
+    .content-block {
+      width: 800px;
+      margin-left: 20px;
+    }
 
-        .input-form > input{
-            width: 300px;
-        }
+    .input-form>input {
+      width: 300px;
+    }
 
-        pre {
-            border: 1px solid steelblue;
-            width: 300px;
-            min-height: 50px;
-        }
-    </style>
+    pre {
+      border: 1px solid steelblue;
+      width: 300px;
+      min-height: 50px;
+    }
+  </style>
 
   <script>
     function addFinalText() {
@@ -40,67 +43,65 @@
 
 <body>
 
-<h2>
-  Классная работа
-</h2>
+  <h2>
+    Классная работа
+  </h2>
 
 
-<h3>
-  Ситуация:
-</h3>
+  <h3>
+    Ситуация:
+  </h3>
 
-<div class = "content-block" id = "textBlock">
-  <p>
-    Закинул старик невод в море...
-  </p>
-</div>
-
-
-<h3>
-  Форма для ввода:
-</h3>
-
-<div class = "input-form" >
-  <input id="inputBlock" type = "text" value = "И сидит теперь на берегу без невода!">
-</div>
-<button type="button" onclick=addFinalText()>Кнопка</button>
-
-<br/><br/><br/>
-<hr/>
-
-<h3>
-  Животное:
-</h3>
-
-<pre id = "animalContainer"></pre>
-
-<h3>
-  Котик:
-</h3>
-
-<pre id = "kittyContainer"></pre>
+  <div class="content-block" id="textBlock">
+    <p>
+      Закинул старик невод в море...
+    </p>
+  </div>
 
 
+  <h3>
+    Форма для ввода:
+  </h3>
 
-<!--Тут выполняем для третье упражнение-->
+  <div class="input-form">
+    <input id="inputBlock" type="text" value="И сидит теперь на берегу без невода!">
+  </div>
+  <button type="button" onclick=addFinalText()>Кнопка</button>
+
+  <br /><br /><br />
+  <hr />
+
+  <h3>
+    Животное:
+  </h3>
+
+  <pre id="animalContainer"></pre>
+
+  <h3>
+    Котик:
+  </h3>
+
+  <pre id="kittyContainer"></pre>
+
+
+
+  <script>
+    const bDay = new Date()
+    bDay.setDate((new Date()).getDate() -365)
+      const animal = {"size":"small",
+  isPredator:true}
+  const kitty = {
+    ...animal,
+    "name":"Василий",
+    "birthDay":bDay
+  }
+  const animalContainerBlock = document.getElementById("animalContainer")
+  animalContainerBlock.innerHTML = JSON.stringify(animal,null,2)
+  const kittyContainerBlock = document.getElementById("kittyContainer")
+  kittyContainerBlock.innerHTML = JSON.stringify(kitty,null,4)
+    </script>
 
 
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
