@@ -17,12 +17,13 @@ public class Currency {
     private String nominativeCase;
     private String genitiveSingular;
     private String genitivePlural;
-    private String answerYes = "да";
-    private String answerNo = "нет";
-    private String answerMale = "мужской";
-    private String answerFemale = "женский";
-    private String answerNeuter = "средний";
-    public Currency() throws IOException {
+
+    public Currency() throws IOException, RuntimeException {
+        final String answerYes = "да";
+        final String answerNo = "нет";
+        final String answerMale = "мужской";
+        final String answerFemale = "женский";
+        final String answerNeuter = "средний";
         boolean cycleBoolean = true;
         String inputCurrency = getStringWithPrintedText("Укажите валюту в которой будет выполнятся работа: ");
         if (checkExistsCurrencyInData(inputCurrency,FILE_NAME)) {
@@ -43,11 +44,7 @@ public class Currency {
                 while (cycleBoolean) {
                     String inputIsChanged = getStringWithPrintedText("Укажите изменяемое ли это слово, возможные варианты ответа: да, нет").toLowerCase();
                     if ((inputIsChanged.equals(answerYes)) || (inputIsChanged.equals(answerNo))) {
-                        if (inputIsChanged.equals(answerYes)) {
-                            this.isChanged = true;
-                        } else {
-                            this.isChanged = false;
-                        }
+                        this.isChanged = inputIsChanged.equals(answerYes);
                         cycleBoolean = false;
                     } else {
                         printText("Вы указали некорректное значение пожалуйста повторите ввод");
@@ -77,14 +74,6 @@ public class Currency {
             }
         }
     }
-    public Currency(String name, boolean isChanged, String genus, String nominativeCase, String genitiveSingular, String genitivePlural) {
-        this.name = name;
-        this.isChanged = isChanged;
-        this.genus = genus;
-        this.nominativeCase = nominativeCase;
-        this.genitiveSingular = genitiveSingular;
-        this.genitivePlural = genitivePlural;
-    }
     public String[] getExistsCurrencyInData (String currency) {
         ArrayList<String> data = readFile(FILE_NAME);
         for (String line : data) {
@@ -98,4 +87,27 @@ public class Currency {
         return "Название: " + name + "\nИзменяемая форма слова: " + isChanged + "\nРод слова: " + genus + "\nФорма именительного падежа: " + nominativeCase + "\nФорма родительного падежа единственного числа: " + genitiveSingular + "\nФорма родительного падежа множественного числа: " + genitivePlural;
     }
 
+    public String getGenus() {
+        return genus;
+    }
+
+    public boolean isChanged() {
+        return isChanged;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNominativeCase() {
+        return nominativeCase;
+    }
+
+    public String getGenitiveSingular() {
+        return genitiveSingular;
+    }
+
+    public String getGenitivePlural() {
+        return genitivePlural;
+    }
 }
