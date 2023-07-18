@@ -1,15 +1,12 @@
-package dev;
+package main;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static dev.ServiceFunction.getStringWithPrintedText;
-import static dev.ExistsCurrencyInData.checkExistsCurrencyInData;
-import static dev.ServiceFunction.printText;
-import static dev.WorkWithFile.writeFile;
-import static dev.WorkWithFile.readFile;
-
 public class Currency {
+    private final IOService ioService;
+    private WorkWithFile workWithFile;
+    private ExistsCurrencyInData existsCurrencyInData;
     final String FILE_NAME = "currency.txt";
     private String name;
     private boolean isChanged;
@@ -18,15 +15,18 @@ public class Currency {
     private String genitiveSingular;
     private String genitivePlural;
 
-    public Currency() throws IOException, RuntimeException {
+    public Currency(IOService ioService, WorkWithFile workWithFile, ExistsCurrencyInData existsCurrencyInData) throws IOException, RuntimeException {
+        this.ioService = ioService;
+        this.workWithFile = workWithFile;
+        this.existsCurrencyInData = existsCurrencyInData;
         final String answerYes = "да";
         final String answerNo = "нет";
         final String answerMale = "мужской";
         final String answerFemale = "женский";
         final String answerNeuter = "средний";
         boolean cycleBoolean = true;
-        String inputCurrency = getStringWithPrintedText("Укажите валюту в которой будет выполнятся работа: ");
-        if (checkExistsCurrencyInData(inputCurrency,FILE_NAME)) {
+        String inputCurrency = ioService.getStringWithPrintedText("Укажите валюту в которой будет выполнятся работа: ");
+        if (existsCurrencyInData.checkExistsCurrencyInData(inputCurrency,FILE_NAME)) {
             String[] currencyData = getExistsCurrencyInData(inputCurrency);
             this.name = currencyData[0];
             this.isChanged = Boolean.valueOf(currencyData[1]);
@@ -34,48 +34,49 @@ public class Currency {
             this.nominativeCase = currencyData[3];
             this.genitiveSingular = currencyData[4];
             this.genitivePlural = currencyData[5];
-            printText("Найденная информация о валюте", getCurrencyAsStringToPrint());
+            ioService.printText("Найденная информация о валюте", getCurrencyAsStringToPrint());
         } else {
-            printText("В справочнике системы не найдено информации о данной валюте",
+            ioService.printText("В справочнике системы не найдено информации о данной валюте",
                     "Необходимо заполнить информацию о валюте");
-            if (getStringWithPrintedText("Для заполнения справочника введите ДА, иначе ввод будет завершен ").equalsIgnoreCase(answerYes)) {
+            if (ioService.getStringWithPrintedText("Для заполнения справочника введите ДА, иначе ввод будет завершен ").equalsIgnoreCase(answerYes)) {
                 this.name = inputCurrency;
-                printText("Заполнение информации по валюте: " + inputCurrency);
+                ioService.printText("Заполнение информации по валюте: " + inputCurrency);
                 while (cycleBoolean) {
-                    String inputIsChanged = getStringWithPrintedText("Укажите изменяемое ли это слово, возможные варианты ответа: да, нет").toLowerCase();
+                    String inputIsChanged = ioService.getStringWithPrintedText("Укажите изменяемое ли это слово, возможные варианты ответа: да, нет").toLowerCase();
                     if ((inputIsChanged.equals(answerYes)) || (inputIsChanged.equals(answerNo))) {
                         this.isChanged = inputIsChanged.equals(answerYes);
                         cycleBoolean = false;
                     } else {
-                        printText("Вы указали некорректное значение пожалуйста повторите ввод");
+                        ioService.printText("Вы указали некорректное значение пожалуйста повторите ввод");
                     }
                 }
                 cycleBoolean = true;
                 while (cycleBoolean) {
-                    String inputGenus = getStringWithPrintedText("Укажите какого рода данное слово, возможные варианты ответа: мужской, женский, средний").toLowerCase();
+                    String inputGenus = ioService.getStringWithPrintedText("Укажите какого рода данное слово, возможные варианты ответа: мужской, женский, средний").toLowerCase();
                     if ((inputGenus.equals(answerMale)) || (inputGenus.equals(answerFemale)) || (inputGenus.equals(answerNeuter))) {
                         this.genus = inputGenus;
                         cycleBoolean = false;
                     } else {
-                        printText("Вы указали некорректное значение пожалуйста повторите ввод");
+                        ioService.printText("Вы указали некорректное значение пожалуйста повторите ввод");
                     }
                 }
                 if (this.isChanged) {
-                    this.nominativeCase = getStringWithPrintedText("Укажите как пишется валюта в именительном падеже: ");
-                    this.genitiveSingular = getStringWithPrintedText("Укажите как пишется валюта в родительном падеже единственном числе: ");
-                    this.genitivePlural = getStringWithPrintedText("Укажите как пишется валюта в родительном падеже множественном числе: ");
+                    this.nominativeCase = ioService.getStringWithPrintedText("Укажите как пишется валюта в именительном падеже: ");
+                    this.genitiveSingular = ioService.getStringWithPrintedText("Укажите как пишется валюта в родительном падеже единственном числе: ");
+                    this.genitivePlural = ioService.getStringWithPrintedText("Укажите как пишется валюта в родительном падеже множественном числе: ");
                 }
-                printText("Будет добавлена информация о валюте:\n",getCurrencyAsStringToPrint());
+                ioService.printText("Будет добавлена информация о валюте:\n",getCurrencyAsStringToPrint());
                 String dataToWrite = this.name + ";" + this.isChanged + ";" + this.genus + ";" + this.nominativeCase + ";" + this.genitiveSingular + ";" + this.genitivePlural;
-                writeFile(dataToWrite, FILE_NAME);
+                workWithFile.writeFile(dataToWrite, FILE_NAME);
             } else {
-                printText("Вы отказались от ввода данных о валюте, завершение работы программы");
+                ioService.printText("Вы отказались от ввода данных о валюте, завершение работы программы");
                 Exception e = new RuntimeException("Отказ от ввода данных о валюте");
             }
         }
     }
     public String[] getExistsCurrencyInData (String currency) {
-        ArrayList<String> data = readFile(FILE_NAME);
+
+        ArrayList<String> data = workWithFile.readFile(FILE_NAME);
         for (String line : data) {
             if (line.split(";")[0].equals(currency)) {
                 return line.split(";");

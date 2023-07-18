@@ -1,23 +1,22 @@
-package dev;
+package main;
 
 import java.io.IOException;
 
-import static dev.ServiceFunction.getIntWithPrintedText;
-import static dev.ServiceFunction.printText;
-
 public class StringConverter {
+    private final IOService ioService;
     private int value;
     private final Currency currency;
 
-    public StringConverter(Currency currency) {
+    public StringConverter(IOService ioService, Currency currency) {
+        this.ioService = ioService;
         this.currency = currency;
     }
 
     public void setValueToConvert () throws IOException {
         while (true) {
-            int inputValue = getIntWithPrintedText("Введите число, которое требуется преобразовать в текстовый формат: ");
+            int inputValue = ioService.getIntWithPrintedText("Введите число, которое требуется преобразовать в текстовый формат: ");
             if (inputValue > 999999999 && value < 1) {
-                printText("Введенное число невходит в допустимый диапазон [1...999999999], введите число повторно");
+                ioService.printText("Введенное число невходит в допустимый диапазон [1...999999999], введите число повторно");
             } else {
                 value = inputValue;
                 break;

@@ -1,12 +1,14 @@
-package dev;
+package main;
 
 import java.io.*;
 import java.util.ArrayList;
 
-import static dev.ServiceFunction.printText;
-
 public class WorkWithFile {
-    public static ArrayList<String> readFile (String fileName) {
+    private final IOService ioService;
+    public WorkWithFile (IOService ioService) {
+        this.ioService = ioService;
+    }
+    public ArrayList<String> readFile (String fileName) {
         ArrayList<String> res = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(fileName);
@@ -18,11 +20,11 @@ public class WorkWithFile {
             bufferedReader.close();
 
         } catch (IOException e) {
-            printText("Exception occurred: " + e.getMessage());
+            ioService.printText("Exception occurred: " + e.getMessage());
         }
         return res;
     }
-    public static void writeFile (String newData, String fileName) {
+    public void writeFile (String newData, String fileName) {
         try {
             File file = new File(fileName);
             FileWriter fileWriter = new FileWriter(file,true);
@@ -30,7 +32,7 @@ public class WorkWithFile {
             bufferedWriter.write(newData+"\n");
             bufferedWriter.close();
         } catch (IOException e) {
-            printText("Exception occurred: " + e.getMessage());
+            ioService.printText("Exception occurred: " + e.getMessage());
         }
     }
     }
