@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class ServiceFunctionTest {
-    private final String expected = "input string";
+    private String expected = "input string";
     private final ByteArrayInputStream inputStream = new ByteArrayInputStream(expected.getBytes());
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     public void testPrintTextEquals () {

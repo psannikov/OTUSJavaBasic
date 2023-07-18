@@ -3,10 +3,9 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Currency {
+public class Currency implements Currencies {
     private final IOService ioService;
     private WorkWithFile workWithFile;
-    private ExistsCurrencyInData existsCurrencyInData;
     final String FILE_NAME = "currency.txt";
     private String name;
     private boolean isChanged;
@@ -15,10 +14,9 @@ public class Currency {
     private String genitiveSingular;
     private String genitivePlural;
 
-    public Currency(IOService ioService, WorkWithFile workWithFile, ExistsCurrencyInData existsCurrencyInData) throws IOException, RuntimeException {
+    public Currency(IOService ioService, WorkWithFile workWithFile) throws IOException, RuntimeException {
         this.ioService = ioService;
         this.workWithFile = workWithFile;
-        this.existsCurrencyInData = existsCurrencyInData;
         final String answerYes = "да";
         final String answerNo = "нет";
         final String answerMale = "мужской";
@@ -26,7 +24,7 @@ public class Currency {
         final String answerNeuter = "средний";
         boolean cycleBoolean = true;
         String inputCurrency = ioService.getStringWithPrintedText("Укажите валюту в которой будет выполнятся работа: ");
-        if (existsCurrencyInData.checkExistsCurrencyInData(inputCurrency,FILE_NAME)) {
+        if (workWithFile.checkExistsCurrencyInData(inputCurrency, FILE_NAME)) {
             String[] currencyData = getExistsCurrencyInData(inputCurrency);
             this.name = currencyData[0];
             this.isChanged = Boolean.valueOf(currencyData[1]);
@@ -65,7 +63,7 @@ public class Currency {
                     this.genitiveSingular = ioService.getStringWithPrintedText("Укажите как пишется валюта в родительном падеже единственном числе: ");
                     this.genitivePlural = ioService.getStringWithPrintedText("Укажите как пишется валюта в родительном падеже множественном числе: ");
                 }
-                ioService.printText("Будет добавлена информация о валюте:\n",getCurrencyAsStringToPrint());
+                ioService.printText("Будет добавлена информация о валюте:\n", getCurrencyAsStringToPrint());
                 String dataToWrite = this.name + ";" + this.isChanged + ";" + this.genus + ";" + this.nominativeCase + ";" + this.genitiveSingular + ";" + this.genitivePlural;
                 workWithFile.writeFile(dataToWrite, FILE_NAME);
             } else {
@@ -74,7 +72,9 @@ public class Currency {
             }
         }
     }
-    public String[] getExistsCurrencyInData (String currency) {
+
+    @Override
+    public String[] getExistsCurrencyInData(String currency) {
 
         ArrayList<String> data = workWithFile.readFile(FILE_NAME);
         for (String line : data) {
@@ -84,30 +84,38 @@ public class Currency {
         }
         return null;
     }
+
+    @Override
     public String getCurrencyAsStringToPrint() {
         return "Название: " + name + "\nИзменяемая форма слова: " + isChanged + "\nРод слова: " + genus + "\nФорма именительного падежа: " + nominativeCase + "\nФорма родительного падежа единственного числа: " + genitiveSingular + "\nФорма родительного падежа множественного числа: " + genitivePlural;
     }
 
+    @Override
     public String getGenus() {
         return genus;
     }
 
+    @Override
     public boolean isChanged() {
         return isChanged;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getNominativeCase() {
         return nominativeCase;
     }
 
+    @Override
     public String getGenitiveSingular() {
         return genitiveSingular;
     }
 
+    @Override
     public String getGenitivePlural() {
         return genitivePlural;
     }

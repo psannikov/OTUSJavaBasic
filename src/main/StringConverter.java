@@ -5,9 +5,9 @@ import java.io.IOException;
 public class StringConverter {
     private final IOService ioService;
     private int value;
-    private final Currency currency;
+    private final Currencies currency;
 
-    public StringConverter(IOService ioService, Currency currency) {
+    public StringConverter(IOService ioService, Currencies currency) {
         this.ioService = ioService;
         this.currency = currency;
     }
@@ -15,8 +15,9 @@ public class StringConverter {
     public void setValueToConvert () throws IOException {
         while (true) {
             int inputValue = ioService.getIntWithPrintedText("Введите число, которое требуется преобразовать в текстовый формат: ");
-            if (inputValue > 999999999 && value < 1) {
-                ioService.printText("Введенное число невходит в допустимый диапазон [1...999999999], введите число повторно");
+            if (inputValue > 999999999 && inputValue < 1) {
+                ioService.printText("Введенное число невходит в допустимый диапазон [1...999999999]");
+                throw new RuntimeException ("Введенное число невходит в допустимый диапазон [1...999999999]");
             } else {
                 value = inputValue;
                 break;
@@ -58,7 +59,7 @@ public class StringConverter {
                     case 7 -> "семнадцать ";
                     case 8 -> "восемнадцать ";
                     case 9 -> "девятнадцать ";
-                    default -> "";
+                    default -> "десять ";
                 };
                 case 2 -> "двадцать ";
                 case 3 -> "тридцать ";
@@ -122,6 +123,7 @@ public class StringConverter {
                         default -> "";
                     };
                 }
+                System.out.println(res);
                 res += string100 + string10 + string1 + valueString;
             }
         }
