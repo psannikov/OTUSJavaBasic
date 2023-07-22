@@ -15,12 +15,12 @@ public class CurrencyStub implements Currencies {
 
     @Override
     public String getGenus() {
-        return null;
+        return "мужской";
     }
 
     @Override
     public boolean isChanged() {
-        return false;
+        return true;
     }
 
     @Override
@@ -30,16 +30,16 @@ public class CurrencyStub implements Currencies {
 
     @Override
     public String getNominativeCase() {
-        return null;
+        return "рубль";
     }
 
     @Override
     public String getGenitiveSingular() {
-        return null;
+        return "рубля";
     }
 
     @Override
     public String getGenitivePlural() {
-        return null;
+        return "рублей";
     }
 }

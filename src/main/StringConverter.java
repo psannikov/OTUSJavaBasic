@@ -15,11 +15,12 @@ public class StringConverter {
     public void setValueToConvert () throws IOException {
         while (true) {
             int inputValue = ioService.getIntWithPrintedText("Введите число, которое требуется преобразовать в текстовый формат: ");
-            if (inputValue > 999999999 && inputValue < 1) {
-                ioService.printText("Введенное число невходит в допустимый диапазон [1...999999999]");
-                throw new RuntimeException ("Введенное число невходит в допустимый диапазон [1...999999999]");
+            if (inputValue > 999999999) {
+                throw new RuntimeException ("Введенное число больше максимально допустимого значения 999999999");
+            } else if (inputValue < 1) {
+                throw new RuntimeException ("Введенное число меньше минимально допустимого занчения 1");
             } else {
-                value = inputValue;
+                this.value = inputValue;
                 break;
             }
         }
@@ -123,7 +124,6 @@ public class StringConverter {
                         default -> "";
                     };
                 }
-                System.out.println(res);
                 res += string100 + string10 + string1 + valueString;
             }
         }
